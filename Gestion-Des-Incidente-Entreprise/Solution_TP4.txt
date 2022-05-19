@@ -1,0 +1,18 @@
+1.Déterminer le total des ventes par magasin en ordonnant les résultats suivant les meilleures ventes par magasin.
+
+MappReducing:
+>>>rddBestSale=purchase.map(lambda line:line.split('\t')).map(lambda data:(data[2],float(data[4]))).reduceByKey(lambda v1,v2:v1+v2).sortBy(lambda a:a[1],ascending=False)
+>>>rddBsetSale.collect()
+
+2.Affichez pour chaque tranche horaire (00, 01, 02,...,23) le nombre total de ventes..
+
+MappingReducing and sort:
+>>>rddHoraire=purchase.map(lambda line:line.split('\t')).map(lambda data:(data[1],float(1))).reduceByKey(lambda v1,v2:v1+v2).sortBy(lambda a:a[0],ascending=True)
+>>>rddHoraire.collect()
+
+3.Afficher par mode de paiement le montant total des achats effectués.
+>>>rddAchatPerPaiement=purchase.map(lambda line:line.split('\t')).map(lambda data:(data[1][:2],float(data[4]))).reduceByKey(lambda v1,v2:v1+v2).sortBy(lambda a:a[1],ascending=False)
+>>>rddAchatPerPaiement.collect()
+	
+
+	
